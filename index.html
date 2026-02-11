@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine</title>
+<title>Happy Valentine 💖🥰❤️</title>
 
 <style>
 body {
     margin: 0;
     height: 100vh;
-    background: pink;
+    background: linear-gradient(135deg, #ff5fa2, #ff9ecf);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +23,11 @@ body {
 h1 {
     font-size: 38px;
     color: #b30059;
+}
+
+p {
+    font-size: 20px;
+    color: #800040;
 }
 
 button {
@@ -75,17 +80,22 @@ canvas {
 <body>
 
 <div class="container" id="main">
-    <h1>Bhoomi, will you be my Valentine? ❤️</h1>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
+    <h1>Bhoomi 🥰 will you be my Valentine? ❤️💌</h1>
+    <p>Because you are my magic 🥰❤️‍🩹💌</p>
+    <button id="yesBtn">YES 🥰❤️</button>
+    <button id="noBtn">NO 😁🤭</button>
 </div>
 
 <canvas id="canvas"></canvas>
 
 <div id="final">
-    <img src="bhoomi.jpg" alt="Us Together">
-    <h1>Forever Together ❤️</h1>
-    <h2>I Love You Bhoomi 💖</h2>
+    <img src="bhoomi.jpg" alt="Love 🥰❤️">
+    <h1>Forever Together 🥰❤️‍🩹💌</h1>
+    <p>
+        “You are the closest I’ll ever come to magic 🥰✨❤️‍🩹💌” <br><br>
+        “You are my heart ❤️, my life 🥰, my one and only thought 💌❤️”
+    </p>
+    <h2>I Love You Bhoomi 🥰❤️💌</h2>
 </div>
 
 <audio id="music" src="tujhme-rab-dikhta-hai.mp3" loop></audio>
@@ -98,22 +108,26 @@ const final = document.getElementById("final");
 const canvas = document.getElementById("canvas");
 const music = document.getElementById("music");
 
+// 😁🤭😜🫣🤐 NAUGHTY NO TEXTS
 const texts = [
- "Are you sure?",
- "Really?",
- "Try again!",
- "Haha 😜",
- "No escape!",
- "Love wins ❤️"
+ "Nope 😁🤭",
+ "Hehe try again 😜🫣",
+ "Not allowed 🤐😜",
+ "You can’t catch me 😁😜",
+ "Say YES only 🤭❤️"
 ];
 
 let i = 0;
 
-// NO button bhagega
+// NO button bhage + vibrate
 noBtn.onclick = () => {
     noBtn.innerText = texts[i++ % texts.length];
     noBtn.style.left = Math.random() * (window.innerWidth - 150) + "px";
     noBtn.style.top  = Math.random() * (window.innerHeight - 100) + "px";
+
+    if (navigator.vibrate) {
+        navigator.vibrate([100, 50, 100]); // naughty vibration 😜
+    }
 };
 
 // YES button
@@ -121,6 +135,11 @@ yesBtn.onclick = () => {
     main.style.display = "none";
     final.style.display = "block";
     music.play();
+
+    if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200, 100, 300]); // happy vibration 🥰❤️
+    }
+
     startHearts();
 };
 
