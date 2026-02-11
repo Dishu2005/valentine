@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 38px;
+    color: #b30059;
+}
+
+button {
+    font-size: 22px;
+    padding: 12px 30px;
+    margin: 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: #ff3366;
+    color: white;
+}
+
+#noBtn {
+    background: white;
+    color: #ff3366;
+    position: absolute;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#final {
+    display: none;
+    text-align: center;
+    color: white;
+}
+
+#final img {
+    width: 260px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255,0,80,0.7);
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>Bhoomi, will you be my Valentine? ❤️</h1>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<div id="final">
+    <img src="bhoomi.jpg" alt="Us Together">
+    <h1>Forever Together ❤️</h1>
+    <h2>I Love You Bhoomi 💖</h2>
+</div>
+
+<audio id="music" src="tujhme-rab-dikhta-hai.mp3" loop></audio>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const main = document.getElementById("main");
+const final = document.getElementById("final");
+const canvas = document.getElementById("canvas");
+const music = document.getElementById("music");
+
+const texts = [
+ "Are you sure?",
+ "Really?",
+ "Try again!",
+ "Haha 😜",
+ "No escape!",
+ "Love wins ❤️"
+];
+
+let i = 0;
+
+// NO button bhagega
+noBtn.onclick = () => {
+    noBtn.innerText = texts[i++ % texts.length];
+    noBtn.style.left = Math.random() * (window.innerWidth - 150) + "px";
+    noBtn.style.top  = Math.random() * (window.innerHeight - 100) + "px";
+};
+
+// YES button
+yesBtn.onclick = () => {
+    main.style.display = "none";
+    final.style.display = "block";
+    music.play();
+    startHearts();
+};
+
+// Hearts animation
+function startHearts() {
+    canvas.style.display = "block";
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext("2d");
+    const hearts = [];
+
+    setInterval(() => {
+        hearts.push({
+            x: Math.random() * canvas.width,
+            y: canvas.height,
+            s: Math.random() * 20 + 10
+        });
+    }, 250);
+
+    function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        hearts.forEach((h,i)=>{
+            ctx.font = h.s + "px Arial";
+            ctx.fillText("❤️", h.x, h.y);
+            h.y -= 2;
+            if(h.y < -50) hearts.splice(i,1);
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+</script>
+
+</body>
+</html>
